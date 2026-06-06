@@ -4,7 +4,8 @@ import MovieForm from './components/MovieForm';
 import MovieGrid from './components/MovieGrid';
 import './App.css';
 
-const API = '/api/movies';
+const API_BASE = import.meta.env.VITE_API_URL || '';
+const API = `${API_BASE}/api/movies`;
 
 const navItems = [
   { label: 'All Movies', value: 'all' },
