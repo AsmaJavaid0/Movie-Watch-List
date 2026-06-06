@@ -47,13 +47,15 @@ function MovieForm({ onAdd, onClose }) {
     let posterUrl = '';
     let posterPublicId = '';
 
+    const API_BASE = import.meta.env.VITE_API_URL || '';
+
     if (imageFile) {
       const data = new FormData();
       data.append('poster', imageFile);
 
-      const uploadRes = await axios.post('/api/uploads', data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const uploadRes = await axios.post(`${API_BASE}/api/uploads`, data, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
 
       posterUrl = uploadRes.data.url;
       posterPublicId = uploadRes.data.publicId;
