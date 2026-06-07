@@ -7,7 +7,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://movie-watch-list-9l2m.vercel.app',
+  origin: 'https://movie-watch-list-9l2m.vercel.app', // Your exact live frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
