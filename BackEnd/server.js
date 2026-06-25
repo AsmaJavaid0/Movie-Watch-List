@@ -9,12 +9,16 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
+  'https://movie-watch-list-lyart.vercel.app',
+  'https://movie-watch-list-md44.vercel.app',
 ];
 
-const vercelOrigin = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'https://movie-watch-list-lyart.vercel.app';
-allowedOrigins.push(vercelOrigin);
+if (process.env.VERCEL_URL) {
+  const url = process.env.VERCEL_URL.startsWith('http')
+    ? process.env.VERCEL_URL
+    : `https://${process.env.VERCEL_URL}`;
+  if (!allowedOrigins.includes(url)) allowedOrigins.push(url);
+}
 
 // Lightweight CORS handler (explicit headers) to control allowed origins
 app.use((req, res, next) => {

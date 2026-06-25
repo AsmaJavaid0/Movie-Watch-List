@@ -47,9 +47,9 @@ function MovieForm({ onAdd, onClose }) {
     let posterUrl = '';
     let posterPublicId = '';
 
-    const API_BASE = import.meta.env.VITE_API_URL ?? (
-      import.meta.env.MODE === 'development' ? '' : 'https://movie-watch-list-lyart.vercel.app'
-    );
+    const API_BASE = (import.meta.env.VITE_API_URL ?? (
+      import.meta.env.MODE === 'development' ? '' : 'https://movie-watch-list-9l2m.vercel.app'
+    )).replace(/\/+$/, '');
 
     try {
       if (imageFile) {

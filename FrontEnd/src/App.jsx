@@ -4,9 +4,9 @@ import MovieForm from './components/MovieForm';
 import MovieGrid from './components/MovieGrid';
 import './App.css';
 
-const API_BASE = import.meta.env.VITE_API_URL ?? (
-  import.meta.env.MODE === 'development' ? '' : 'https://movie-watch-list-lyart.vercel.app'
-);
+const API_BASE = (import.meta.env.VITE_API_URL ?? (
+  import.meta.env.MODE === 'development' ? '' : 'https://movie-watch-list-9l2m.vercel.app'
+)).replace(/\/+$/, '');
 const API = `${API_BASE}/api/movies`;
 
 const navItems = [
