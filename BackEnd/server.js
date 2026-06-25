@@ -9,8 +9,8 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
-  'https://movie-watch-list-lyart.vercel.app',
-  'https://movie-watch-list-md44.vercel.app',
+  'https://movie-watch-list-phkh.vercel.app',
+  'https://movie-watch-list-9l2m.vercel.app',
 ];
 
 if (process.env.VERCEL_URL) {
@@ -20,10 +20,19 @@ if (process.env.VERCEL_URL) {
   if (!allowedOrigins.includes(url)) allowedOrigins.push(url);
 }
 
-// Lightweight CORS handler (explicit headers) to control allowed origins
+// Helper: check if origin is allowed (includes any movie-watch-list Vercel preview deploy)
+function isAllowedOrigin(origin) {
+  if (!origin) return true;
+  if (allowedOrigins.includes(origin)) return true;
+  // Allow any Vercel preview/production deploy for this project
+  if (/^https:\/\/movie-watch-list(-[a-z0-9]+)?\.vercel\.app$/.test(origin)) return true;
+  return false;
+}
+
+// CORS handler — always respond to OPTIONS so preflight never fails silently
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (!origin || allowedOrigins.includes(origin)) {
+  if (isAllowedOrigin(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin || '');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
